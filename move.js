@@ -196,6 +196,7 @@ const move = {
 		} else {
 			obj.transform[attr] = val;
 			var transformVal = '';
+			var translateVal = '';
 			for(var s in obj.transform) {
 				switch(s) {
 					case 'scale':
@@ -213,8 +214,11 @@ const move = {
 						transformVal += ' ' + s + '(' + obj.transform[s] + 'deg)';
 						break;
 					default:
-						transformVal += ' ' + s + '(' + obj.transform[s] + 'px)';
+						translateVal = ' translate3d(' + (obj.transform['translateX'] || 0) + 'px,' + (obj.transform['translateY'] || 0) + 'px,' + (obj.transform['translateZ'] || 0) + 'px)';
 				};
+			};
+			if( translateVal ) {
+				transformVal += translateVal;
 			};
 			obj.style.wekitTransform = obj.style.transform = transformVal;
 		}
